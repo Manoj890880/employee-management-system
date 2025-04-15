@@ -223,7 +223,7 @@ src
 To help you test the API endpoints, we've included a Postman collection:
 
 ### Option 1: Import from File
-1. Download the [Employee API Postman Collection](./docs/Employee_API.postman_collection.json)
+1. [Download the Employee API Postman Collection](https://github.com/Manoj890880/employee-management-system/raw/main/employee-apis/src/main/resources/docs/Employee%20Management%20API.postman_collection.json)
 2. Open Postman
 3. Click "Import" > "File" > select the downloaded JSON file
 
