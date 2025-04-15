@@ -257,6 +257,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Your Name - your.email@example.com
+manojsahoo890880@gmail.com
 
-Project Link: [https://github.com/yourusername/employee-api](https://github.com/yourusername/employee-api)
+Project Link: [https://github.com/Manoj890880/employee-management-system](https://github.com/Manoj890880/employee-management-system)
