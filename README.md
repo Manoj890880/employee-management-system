@@ -218,6 +218,22 @@ src
             └── service          # Service tests
 ```
 
+## 🧪 Postman Collection
+
+To help you test the API endpoints, we've included a Postman collection:
+
+### Option 1: Import from File
+1. Download the [Employee API Postman Collection](./docs/Employee_API.postman_collection.json)
+2. Open Postman
+3. Click "Import" > "File" > select the downloaded JSON file
+
+### Option 2: Import from GitHub directly
+1. Open Postman
+2. Click "Import" > "Link"
+3. Paste this URL: `https://github.com/Manoj890880/employee-management-system/raw/main/employee-apis/src/main/resources/docs/Employee%20Management%20API.postman_collection.json`
+4. Click "Import"
+
+The collection includes ready-to-use requests for all endpoints with examples and environment variables.
 
 ## 📧 Contact
 
