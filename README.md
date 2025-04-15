@@ -183,26 +183,6 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 ```
 
-### Application Properties
-
-The `application.properties` file in the `src/main/resources` directory contains various configuration options:
-
-```properties
-# Server Configuration
-server.port=8080
-
-# JPA/Hibernate Configuration
-spring.jpa.show-sql=true
-spring.jpa.hibernate.ddl-auto=update
-
-# Logging
-logging.level.org.springframework=INFO
-logging.level.com.brandsmashers=DEBUG
-
-# Default date format
-spring.jackson.date-format=yyyy-MM-dd
-```
-
 ## 🧪 Testing
 
 Run the tests with:
@@ -214,8 +194,6 @@ mvn test
 The project includes comprehensive tests for:
 - Controller layer
 - Service layer
-- Repository layer
-- Integration tests
 
 ## 📝 Code Structure
 
@@ -237,23 +215,9 @@ src
     └── java
         └── com.brandsmashers.employee_api
             ├── controller       # Controller tests
-            ├── repository       # Repository tests
             └── service          # Service tests
 ```
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 📧 Contact
 
