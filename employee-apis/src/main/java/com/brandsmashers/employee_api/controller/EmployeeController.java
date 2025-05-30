@@ -4,6 +4,7 @@ import com.brandsmashers.employee_api.dto.EmployeeDTO;
 import com.brandsmashers.employee_api.model.Employee;
 import com.brandsmashers.employee_api.service.EmployeeService;
 import jakarta.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -85,5 +86,21 @@ public class EmployeeController {
   public ResponseEntity<String> totalSalary(@RequestParam String department) {
     Double total = employeeService.getTotalSalaryByDepartment(department);
     return ResponseEntity.ok("Total salary for " + department + ": " + total);
+  }
+
+  @GetMapping("/pdf/{id}")
+  public ResponseEntity<byte[]> getEmployeePdf(@PathVariable Long id) throws IOException {
+    Optional<EmployeeDTO> employeeOpt = employeeService.getEmployeeById(id);
+
+    if (employeeOpt.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    byte[] pdf = employeeService.generateEmployeePdf(employeeOpt.get());
+
+    return ResponseEntity.ok()
+        .header("Content-Type", "application/pdf")
+        .header("Content-Disposition", "inline; filename=employee-" + id + ".pdf")
+        .body(pdf);
   }
 }

@@ -5,9 +5,17 @@ import com.brandsmashers.employee_api.exception.ResourceNotFoundException;
 import com.brandsmashers.employee_api.model.Employee;
 import com.brandsmashers.employee_api.repository.EmployeeRepository;
 import com.brandsmashers.employee_api.specification.EmployeeSpecification;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -91,5 +99,63 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   public Double getTotalSalaryByDepartment(String department) {
     return employeeRepository.getTotalSalaryByDepartment(department);
+  }
+
+  @Override
+  public byte[] generateEmployeePdf(EmployeeDTO employee) throws IOException {
+    try (PDDocument document = new PDDocument();
+        ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+
+      PDPage page = new PDPage(PDRectangle.A4);
+      document.addPage(page);
+
+      PDType1Font fontBold = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
+      PDType1Font fontNormal = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+
+      try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+        float y = 750;
+
+        contentStream.beginText();
+        contentStream.setFont(fontBold, 18);
+        contentStream.newLineAtOffset(50, y);
+        contentStream.showText("Employee Details");
+        contentStream.endText();
+
+        y -= 40;
+
+        contentStream.beginText();
+        contentStream.setFont(fontNormal, 12);
+        contentStream.newLineAtOffset(50, y);
+        contentStream.showText("Name: " + employee.getName());
+        contentStream.endText();
+
+        y -= 20;
+
+        contentStream.beginText();
+        contentStream.setFont(fontNormal, 12);
+        contentStream.newLineAtOffset(50, y);
+        contentStream.showText("Department: " + employee.getDepartment());
+        contentStream.endText();
+
+        y -= 20;
+
+        contentStream.beginText();
+        contentStream.setFont(fontNormal, 12);
+        contentStream.newLineAtOffset(50, y);
+        contentStream.showText("Joining Date: " + employee.getJoiningDate());
+        contentStream.endText();
+
+        y -= 20;
+
+        contentStream.beginText();
+        contentStream.setFont(fontNormal, 12);
+        contentStream.newLineAtOffset(50, y);
+        contentStream.showText("Email: " + employee.getEmail());
+        contentStream.endText();
+      }
+
+      document.save(out);
+      return out.toByteArray();
+    }
   }
 }
