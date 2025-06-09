@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class ViewController {
 
-    @Autowired
-    private ScoreService scoreService;
+  @Autowired private ScoreService scoreService;
 
-    @GetMapping("/team/{name}")
-    public String viewScore(@PathVariable String name, Model model) {
-        Score score = scoreService.getScoreByTeamName(name);
-        model.addAttribute("teamName", score.getTeamName());
-        model.addAttribute("score", score.getScore());
-        return "score";
-    }
+  @GetMapping("/team/{name}")
+  public String viewScore(@PathVariable String name, Model model) {
+    Score score = scoreService.getScoreByTeamName(name);
+    model.addAttribute("teamName", score.getTeamName());
+    model.addAttribute("score", score.getScore());
+    return "score";
+  }
 }

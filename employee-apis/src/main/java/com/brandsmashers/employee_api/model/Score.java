@@ -9,11 +9,10 @@ import lombok.Data;
 @Entity
 @Data
 public class Score {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String teamName;
-    private int score;
-
+  private String teamName;
+  private int score;
 }

@@ -7,18 +7,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ScoreService {
-    @Autowired
-    private ScoreRepository repo;
+  @Autowired private ScoreRepository repo;
 
-    public Score updateScore(String teamName, int newScore) {
-        Score score = repo.findByTeamName(teamName)
-                          .orElseThrow(() -> new RuntimeException("Team not found"));
-        score.setScore(newScore);
-        return repo.save(score);
-    }
+  public Score updateScore(String teamName, int newScore) {
+    Score score =
+        repo.findByTeamName(teamName).orElseThrow(() -> new RuntimeException("Team not found"));
+    score.setScore(newScore);
+    return repo.save(score);
+  }
 
-    public Score getScoreByTeamName(String teamName) {
-        return repo.findByTeamName(teamName)
-                   .orElseThrow(() -> new RuntimeException("Team not found"));
-    }
+  public Score getScoreByTeamName(String teamName) {
+    return repo.findByTeamName(teamName).orElseThrow(() -> new RuntimeException("Team not found"));
+  }
 }
