@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Live Score</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+<h2>Team: <span th:text="${teamName}"></span></h2>
+<h3>Score: <span id="scoreValue" th:text="${score}"></span></h3>
+
+<script>
+    const teamName = /*[[${teamName}]]*/ 'TeamA';
+
+    const socket = new SockJS('/ws-score');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        stompClient.subscribe('/topic/score/' + teamName, function (message) {
+            const scoreData = JSON.parse(message.body);
+            document.getElementById('scoreValue').innerText = scoreData.score;
+        });
+    });
+</script>
+</body>
+</html>
